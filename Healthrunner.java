@@ -1,23 +1,42 @@
+import java.util.Scanner;
 class Healthrunner{
-	public static void main(String[] args){
-		Health health = new Health();
-		char input = 0;
-		int damage = 0;
-		while(!health.dead()){
-			System.out.println(health);
-			damage = -6 + (int)(Math.random()*13);
-			switch (input){
-				case 'Q':
-					break;
-				case 'q':
-					break;
-				default:
-					System.out.println(health.takeDamage(damage));
-					break;	
-			}
-		}
-		if(health.dead()){
-			System.out.println("dead");
+	private Health health;
+	private Scanner kb;
+	public Healthrunner(){
+		health = new Health();
+		kb = new Scanner(System.in);
+	}
+	public void loop(){
+		do {
+			System.out.println("Your turn! Hit Enter when ready");
+		} while (!health.dead() && prompt(getinchar()));
+		if (health.dead()){
+			System.out.println("You Died!!!");
 		}
 	}
+	private char getinchar(){
+		String nextline = kb.nextLine();
+		if(nextline.length() > 0)
+			return(nextline.charAt(0));
+		return(0);
+	}
+	private boolean prompt(char in){
+		int damage = 0;
+		switch (in){
+			case 'Q':
+				return(false);
+			case 'q':
+				return(false);
+			default:
+				damage = -6 + (int)(Math.random()*13);
+				System.out.println(health.takeDamage(damage));
+				break;	
+		}
+		return(true);
+	}
+	public static void main(String[] args){
+		Healthrunner hrunner = new Healthrunner();
+		hrunner.loop();
+	}
+
 }
