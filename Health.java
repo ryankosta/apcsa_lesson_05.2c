@@ -6,23 +6,26 @@ class Health{
 	}
 	public String takeDamage(int health){
 		String message = "";
-		if(health + healthcount <= HEALTHLOAD)
+		if (health + healthcount <= HEALTHLOAD) {
 			healthcount += health;
-		if(health > 0)
+		}
+		if (health > 0) {
 			message = "Power up +"+health;
-		else
+		}
+		else {
 			message = "taking " + (-1 * health) + " damage";
+		}
 		
 		return(message);
 	}
 	public String toString(){
 		String message = "";
 		int i = 0;
-		while(i < healthcount){
+		while (i < healthcount) {
 			message += " @ ";
 			i++;
 		}
-		while(i < HEALTHLOAD){
+		while (i < HEALTHLOAD) {
 			message += "[ ]";
 			i++;
 		}
